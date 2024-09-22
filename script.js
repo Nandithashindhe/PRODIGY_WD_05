@@ -44,8 +44,8 @@ function weatherShowFn(data) {
     $('#weather-info').removeClass('error').show();
     $('#city-name').text(data.name);
 
-    // Calculate the time in the city's timezone
-    const timezoneOffset = data.timezone; // Timezone offset in seconds
+    
+    const timezoneOffset = data.timezone; 
     const localTime = moment().utc().utcOffset(timezoneOffset / 60).format('MMMM Do YYYY, h:mm:ss a');
     
     $('#date').text(localTime);
