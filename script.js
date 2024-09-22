@@ -40,11 +40,15 @@ async function weatherFn(cName) {
         $('#loading').hide();
     }
 }
-
 function weatherShowFn(data) {
     $('#weather-info').removeClass('error').show();
     $('#city-name').text(data.name);
-    $('#date').text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+
+    // Calculate the time in the city's timezone
+    const timezoneOffset = data.timezone; // Timezone offset in seconds
+    const localTime = moment().utc().utcOffset(timezoneOffset / 60).format('MMMM Do YYYY, h:mm:ss a');
+    
+    $('#date').text(localTime);
     $('#temperature').html(`${data.main.temp} °C`);
     $('#description').text(data.weather[0].description);
     $('#weather-now').text('Weather now:');
